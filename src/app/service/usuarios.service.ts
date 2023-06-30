@@ -1,45 +1,30 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
+  url = 'http://localhost:3000/api/v1/usuarios';
   usuarios: any[] = [];
   selectedUsuario: any = null
 
-  constructor() {
+  constructor(private http:HttpClient) {
     this.loadUsuarios()
   }
 
-  private loadUsuarios() {
-    this.usuarios = [];
-    this.usuarios.push({
-      id: 1,
-      nombreUser: "Pepito",
-      apellido: "Lopez",
-      cedula: "6969696969",
-      correo: "plopez@yavirac.edu.ec",
-      estado: true
-    },
-      {
-        id: 2,
-        nombreUser: "Juan",
-        apellido: "perez",
-        cedula: "6969696969",
-        correo: "jPerez@yavirac.edu.ec",
-        estado: false
-      }
-    )
-
+  loadUsuarios() {
+    return this.http.get(this.url);
   }
 
   /**
    * funtion agregar usuarios
    */
-  addUsuario(payLoad: any) {
-    this.usuarios.push(payLoad);
+  addUsuarios(payload: any) {
+    let data = Object.values(payload)
+    console.log("Data: "+ data);
+    return this.http.post(this.url , payload);
   }
-
   /**
    * function actualizar usuarios 
    */

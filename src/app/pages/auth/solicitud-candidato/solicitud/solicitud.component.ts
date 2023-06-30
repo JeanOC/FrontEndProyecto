@@ -11,11 +11,22 @@ import Swal from 'sweetalert2';
 export class SolicitudComponent {
   candidatos: any[] = [];
   selectedCandidato: any;
-
+  listarUsuario:any
   constructor(private candidatoService: CandidatosService, private router: Router) {
-    this.candidatos = this.candidatoService.candidatos;
+    this.loadCandidato()
   }
 
+  loadCandidato() {
+    this.candidatoService.loadListas().subscribe(
+      (res) => {
+        this.listarUsuario = <any>res;
+        this.candidatos = Object.values(this.listarUsuario);
+        this.candidatos = Object.values(this.candidatos[0]);
+       // this.tipoLista = Object.values(this.data[0].tipoLista)
+      },
+      (err) => console.log(err)
+    );
+  }
   verDetalleCandidato(item: any) {
     this.candidatoService.setSelectedCandidato(item);
     this.router.navigate(['/info-candidato']);

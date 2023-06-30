@@ -14,6 +14,8 @@ import { InfoCandidatoComponent } from './pages/auth/solicitud-candidato/info-ca
 import { AgregarUsuariosComponent } from './pages/auth/agregar-usuarios/agregar-usuarios.component';
 import { VistaListaComponent } from './pages/auth/listas/vista-lista/vista-lista.component';
 import { VistaIntegrantesComponent } from './pages/auth/listas/vista-integrantes/vista-integrantes.component';
+import { PermisosGuard } from './guard/permisos.guard';
+import { RoleGuard } from './guard/role.guard';
 
 
 
@@ -22,20 +24,20 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'menu', component: MenuComponent },
-  { path: 'candidato', component: CandidatoComponent },
-  { path: 'observaciones', component: ObservacionesComponent },
-  { path: 'solicitud', component: SolicitudComponent },
-  { path: 'perfil-candidato', component: PerfilCandidatoComponent },
-  { path: 'observaciones', component: ObservacionesComponent },
-  { path: 'ver-candidato', component: VerCandidatoComponent },
-  { path: 'agregar-usuarios', component: AgregarUsuariosComponent },
-  { path: 'info-candidato', component: InfoCandidatoComponent },
+  { path: 'candidato', component: CandidatoComponent},
+  { path: 'observaciones', component: ObservacionesComponent, canActivate:[PermisosGuard] },
+  { path: 'solicitud', component: SolicitudComponent ,canActivate:[PermisosGuard, RoleGuard]},
+  { path: 'perfil-candidato', component: PerfilCandidatoComponent ,canActivate:[PermisosGuard]},
+  { path: 'observaciones', component: ObservacionesComponent ,canActivate:[PermisosGuard]},
+  { path: 'ver-candidato', component: VerCandidatoComponent ,canActivate:[PermisosGuard]},
+  { path: 'agregar-usuarios', component: AgregarUsuariosComponent ,canActivate:[PermisosGuard]},
+  { path: 'info-candidato', component: InfoCandidatoComponent ,canActivate:[PermisosGuard]},
   { path: 'resetearContraseña', component: ResetPasswordComponent },
-  { path: 'usuarios', component: UsuariosComponent },
+  { path: 'usuarios', component: UsuariosComponent ,canActivate:[PermisosGuard]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'agregar-usuarios', component: AgregarUsuariosComponent },
-  { path: 'vista-lista', component: VistaListaComponent },
-  { path: 'vista-integrantes', component: VistaIntegrantesComponent },
+  { path: 'agregar-usuarios', component: AgregarUsuariosComponent ,canActivate:[PermisosGuard]},
+  { path: 'vista-lista', component: VistaListaComponent ,canActivate:[PermisosGuard]},
+  { path: 'vista-integrantes', component: VistaIntegrantesComponent ,canActivate:[PermisosGuard]},
 
 ];
 

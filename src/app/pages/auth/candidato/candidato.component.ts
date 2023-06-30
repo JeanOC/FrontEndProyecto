@@ -33,6 +33,7 @@ export class CandidatoComponent {
   propuesta: string = ''; //cambio
   estado: boolean = false;
   
+  data:any
   form: FormGroup;
 
 
@@ -65,7 +66,7 @@ export class CandidatoComponent {
       })
     } else {
       this.form = formBuilder.group({
-        id: [0],
+        //id: [0],
         nombre: ['', [Validators.required, Validators.minLength(2)]],
         datosPresiNombre: ['', [Validators.required, Validators.minLength(2)]],
         datosPresiCorreo: ['', [Validators.required, Validators.email]],
@@ -93,6 +94,7 @@ export class CandidatoComponent {
   onSubmit() {
     if (this.form.valid) {
       this.addCandidato();
+     // this.onFileSelected(this.logo)
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
@@ -145,10 +147,30 @@ export class CandidatoComponent {
   }
 
   addCandidato() {
-    this.candidatosService.addCandidato(this.form.value);
-    console.log(this.candidatosService.candidatos);
+    this.candidatosService.addCandidato(this.form.value).subscribe(
+      response =>{
+        console.log(response);
+      }
+    )
+    this.data = Object.values(this.form.value);
+    console.log("Desde componente" + this.data);
   }
 
+  // onFileSelected(event: any){
+  //   const file : File = event.target.files[0]
+  //   this.candidatosService.uploadImage(file)
+  // }
+
+  
+  // addCandidatos() {
+  //   this.candidatosService.addCandidatos(this.form.value).subscribe(
+  //     response =>{
+  //       console.log(response);
+  //     }
+  //   )
+  //   this.data = Object.values(this.form.value);
+  //   console.log("Desde componente" + this.data);
+  // }
   updateCandidatos() {
     this.candidatosService.updateCandidato(this.idField.value, this.form.value);
     console.log(this.candidatosService.candidatos);

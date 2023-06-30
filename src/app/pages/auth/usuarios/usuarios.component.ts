@@ -13,13 +13,24 @@ import { Router } from '@angular/router';
 })
 export class UsuariosComponent {
   usuarios: any[] = [];
+  listarUsuario:any;
   selectedUsuario: any;
 
   constructor(private usuariosService: UsuariosService, 
-    private router: Router,  
+    private router: Router,  private usuarioService: UsuariosService
     ) {
-    this.usuarios = this.usuariosService.usuarios;
-    console.log(this.usuarios)
+      this.loadUsuarios()
+  }
+  loadUsuarios() {
+    this.usuarioService.loadUsuarios().subscribe(
+      (res) => {
+        this.listarUsuario = <any>res;
+        this.usuarios = Object.values(this.listarUsuario);
+        this.usuarios = Object.values(this.usuarios[0]);
+       // this.tipoLista = Object.values(this.data[0].tipoLista)
+      },
+      (err) => console.log(err)
+    );
   }
 
   verDetalleUsuario(item: any) {

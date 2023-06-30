@@ -18,7 +18,7 @@ export class AgregarUsuariosComponent {
   cedula: number = 0; //cambio
   correo: string = ''; //cambio
   estadoUser: boolean = false;
-  
+  data:any;
   formUser: FormGroup;
 
 
@@ -29,20 +29,30 @@ export class AgregarUsuariosComponent {
     if (this.usuariosService.selectedUsuario){
       this.formUser = formBuilder.group({
         id: [this.usuariosService.selectedUsuario.id],
-        nombreUser: [this.usuariosService.selectedUsuario.nombreUser, [Validators.required, Validators.minLength(10)]],
-        apellido: [this.usuariosService.selectedUsuario.apellido, [Validators.required, Validators.minLength(10)]],
-        cedula: [this.usuariosService.selectedUsuario.cedula, [Validators.required, Validators.min(10)]],
+        nombre: [this.usuariosService.selectedUsuario.nombre, [Validators.required, Validators.minLength(5)]],
+        apellido: [this.usuariosService.selectedUsuario.apellido, [Validators.required, Validators.minLength(5)]],
+        cedula: [this.usuariosService.selectedUsuario.cedula, [Validators.required, Validators.min(5)]],
         correo: [this.usuariosService.selectedUsuario.correo, [Validators.required, Validators.email]],
-        estadoUser: [this.usuariosService.selectedUsuario.estado, []],
+        carrera: [this.usuariosService.selectedUsuario.carrera, [Validators.required, Validators.minLength(5)]],
+        clave: [this.usuariosService.selectedUsuario.clave, [Validators.required, Validators.minLength(5)]],
+        semestre: [this.usuariosService.selectedUsuario.semestre, [Validators.required, Validators.minLength(5)]],
+        estado: [this.usuariosService.selectedUsuario.estado, []],
+        roles: [this.usuariosService.selectedUsuario.roles, []],
+        estadoVoto: [this.usuariosService.selectedUsuario.estadoVoto, []],
       })
     } else {
       this.formUser = formBuilder.group({
-        id: [0],
-        nombreUser: ['', [Validators.required, Validators.minLength(10)]],
-        apellido: ['', [Validators.required, Validators.minLength(10)]],
-        cedula: [0, [Validators.required, Validators.min(10)]],
+       // id: [0],
+        nombre: ['', [Validators.required, Validators.minLength(5)]],
+        apellido: ['', [Validators.required, Validators.minLength(5)]],
+        cedula: [, [Validators.required, Validators.min(10)]],
         correo: ['', [Validators.required, Validators.email]],
-        estadoUser: [false,[]],
+        carrera: ['', [Validators.required, Validators.minLength(5)]],
+        clave: ['', [Validators.required, Validators.min(10)]],
+        semestre: ['', [Validators.required, Validators.min(10)]],
+        estado: [false, []],
+        roles: ['', []],
+        estadoVoto: [false, []],
       })
     }
   }
@@ -104,8 +114,13 @@ export class AgregarUsuariosComponent {
   }
 
   addUsuario() {
-    this.usuariosService.addUsuario(this.formUser.value);
-    console.log(this.usuariosService.usuarios);
+    this.usuariosService.addUsuarios(this.formUser.value).subscribe(
+      response =>{
+        console.log(response);
+      }
+    )
+    this.data = Object.values(this.formUser.value);
+    console.log("Desde componente" + this.data);
   }
 
   updateUsuario() {
