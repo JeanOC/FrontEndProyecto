@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+</head>
+<app-header></app-header>
+<body>
+    
+    <div class="container">
+        <header>Instituto Superior Tecnológico de Turismo y Patrimonio</header>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" style="height: 460px;">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Registro de Candidato</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Nombre de la Lista</label>
+                            <input type="text" formControlName="nombre">
+                            <small *ngIf="form.controls['nombre'].errors && form.controls['nombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            
+                        </div>
+
+                        <div class="input-field">
+                            <div class="input-container">
+                            <label>Datos del Presidente</label>
+                            <input type="text" placeholder="Nombre" formControlName="datosPresiNombre">
+                            <small *ngIf="form.controls['datosPresiNombre'].errors && form.controls['datosPresiNombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            <input type="email" placeholder="Correo" formControlName="datosPresiCorreo">
+                            <small *ngIf="form.controls['datosPresiCorreo'].errors && form.controls['datosPresiCorreo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <div class="input-container">
+                            <label>Datos del Vicepresidente</label>
+                            <input type="text" placeholder="Nombre" formControlName="datosViceNombre">
+                            <small *ngIf="form.controls['datosViceNombre'].errors && form.controls['datosViceNombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            <input type="text" placeholder="Correo" formControlName="datosViceCorreo">
+                            <small *ngIf="form.controls['datosViceCorreo'].errors && form.controls['datosViceCorreo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Eslogan de la Lista</label>
+                            <input type="text" formControlName="slogan">
+                            <small *ngIf="form.controls['slogan'].errors && form.controls['slogan'].touched">
+                                El campo debe ser Completado
+                            </small>
+                        </div>
+
+                        <div class="input-field">
+                            <div class="input-container">
+                                <label>Datos del Secretario/a</label>
+                                <input type="text" placeholder="Nombre" formControlName="datosSecretarioNombre">
+                            <small *ngIf="form.controls['datosSecretarioNombre'].errors && form.controls['datosSecretarioNombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            <input type="text" placeholder="Correo" formControlName="datosSecretarioCorreo">
+                            <small *ngIf="form.controls['datosSecretarioCorreo'].errors && form.controls['datosSecretarioCorreo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                                </div>
+                        </div>
+
+                        <div class="input-field">
+                            <div class="input-container">
+                                <label>Datos del Tesorero/a</label>
+                                <input type="text" placeholder="Nombre" formControlName="datosTesoreroNombre">
+                            <small *ngIf="form.controls['datosTesoreroNombre'].errors && form.controls['datosTesoreroNombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            <input type="text" placeholder="Correo" formControlName="datosTesoreroCorreo">
+                            <small *ngIf="form.controls['datosTesoreroCorreo'].errors && form.controls['datosTesoreroCorreo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Número de la Lista</label>
+                            <input type="text" formControlName="nro_lista">
+                            <small *ngIf="form.controls['nro_lista'].errors && form.controls['nro_lista'].touched">
+                                El campo debe ser Completado
+                            </small>
+                        </div>
+
+                        <div class="input-field">
+                            <div class="input-container">
+                                <label>Datos del Vocal 1</label>
+                                <input type="text" placeholder="Nombre" formControlName="datosVocal1Nombre">
+                            <small *ngIf="form.controls['datosVocal1Nombre'].errors && form.controls['datosVocal1Nombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            <input type="text" placeholder="Correo" formControlName="datosVocal1Correo">
+                            <small *ngIf="form.controls['datosVocal1Correo'].errors && form.controls['datosVocal1Correo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                                </div>
+                        </div>
+
+                        <div class="input-field">
+                            <div class="input-container">
+                                <label>Datos del Vocal 2</label>
+                                <input type="text" placeholder="Nombre" formControlName="datosVocal2Nombre">
+                            <small *ngIf="form.controls['datosVocal2Nombre'].errors && form.controls['datosVocal2Nombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            <input type="text" placeholder="Correo" formControlName="datosVocal2Correo">
+                            <small *ngIf="form.controls['datosVocal2Correo'].errors && form.controls['datosVocal2Correo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                                </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Logo de la Lista</label>
+                            <input type="file" id="file-upload" accept=".png, .jpg, .jpeg" formControlName="logo">
+                            <small *ngIf="form.controls['logo'].errors && form.controls['logo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                        </div>
+
+                        <div class="input-field">
+                            <div class="input-container">
+                                <label>Datos del Vocal 3</label>
+                                <input type="text" placeholder="Nombre" formControlName="datosVocal3Nombre">
+                            <small *ngIf="form.controls['datosVocal3Nombre'].errors && form.controls['datosVocal3Nombre'].touched">
+                                El campo debe ser Completado
+                            </small>
+                            <input type="text" placeholder="Correo" formControlName="datosVocal3Correo">
+                            <small *ngIf="form.controls['datosVocal3Correo'].errors && form.controls['datosVocal3Correo'].touched">
+                                El campo debe ser Completado
+                            </small>
+                                </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Registrar Propuesta</label>
+                            <input type="text" formControlName="propuesta">
+                            <small *ngIf="form.controls['propuesta'].errors && form.controls['propuesta'].touched">
+                                El campo debe ser Completado
+                            </small>
+                        </div>
+                    </div>
+                    <button type="submit">Registrar</button>
+                </div> 
+        </form>
+        
+        <div class="container-p">
+            <div class="left">
+                <button class="button-p" routerLink="/login">
+                    <span class="image-container">
+                      <img src="./assets/back.png" alt="Imagen" class="image-p">
+                    </span>
+                    <span class="text">Volver al Inicio</span>
+                  </button>
+            </div>
+            <p>Artículo 11 del reglamento de elecciones del IST Yavirac.
+                De las candidaturas. - Una vez efectuada la convocatoria a elecciones, el Secretario del Consejo Electoral receptará las candidaturas de los postulantes, dentro del plazo establecido en el cronograma de acuerdo a la ficha de inscripción que determine el Consejo Electoral.
+                
+                Las candidaturas deberán presentarse en lista, respetando la equidad de género, igualdad de oportunidades y equidad de conformidad a lo establecido en la Constitución de la República y en la Ley Orgánica de Educación Superior.</p>
+          </div>
+    </div>
+    <div class="button-container">
+        <a [href]="archivoUrl" download="Reglamento">
+        <button class="image-button">
+          <span>Descargar
+            <br>Reglamento</span>
+          <img src="./assets/download.png" alt="Imagen Botón 1">
+        </button></a>
+        <button class="image-button">
+          <span>Descargar
+            <br>Ficha</span>
+          <img src="./assets/download.png" alt="Imagen Botón 2">
+        </button>
+        <button class="image-button">
+          <span>Descargar
+            <br>Requisitos</span>
+          <img src="./assets/download.png" alt="Imagen Botón 3">
+        </button>
+        <button class="image-button">
+          <span>Adjuntar
+            <br>Requisitos</span>
+          <img src="./assets/attach.png" alt="Imagen Botón 4">
+        </button>
+      </div>
+     
+      
+</body>
+</html>
