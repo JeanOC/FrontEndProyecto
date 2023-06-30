@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CandidatosService } from '../../../service/candidatos.service';
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -32,15 +33,30 @@ export class CandidatoComponent {
   logo: string = ''; //cambio
   propuesta: string = ''; //cambio
   estado: boolean = false;
-  
-  data:any
-  form: FormGroup;
 
+  data: any
+  form: FormGroup;
+  public pre: any = [];
+  public archivos: any = []
+
+  onFile(event: any): any {
+    const file: File = event.target.files[0];
+    this.previewImage(file);
+  }
+
+  previewImage(file: File): any {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.pre = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
 
   constructor(private formBuilder: FormBuilder,
-              private candidatosService: CandidatosService,
-              ) {
-    if (this.candidatosService.selectedCandidato){
+    private candidatosService: CandidatosService,
+    private sanitazer: DomSanitizer
+  ) {
+    if (this.candidatosService.selectedCandidato) {
       this.form = formBuilder.group({
         id: [this.candidatosService.selectedCandidato.id],
         nombre: [this.candidatosService.selectedCandidato.nombre, [Validators.required, Validators.minLength(2)]],
@@ -68,25 +84,25 @@ export class CandidatoComponent {
       this.form = formBuilder.group({
         //id: [0],
         nombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosPresiNombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosPresiCorreo: ['', [Validators.required, Validators.email]],
-        datosViceNombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosViceCorreo: ['', [Validators.required, Validators.email]],
+        datosPresiNombre: ['', []],
+        datosPresiCorreo: ['', []],
+        datosViceNombre: ['', []],
+        datosViceCorreo: ['', []],
         slogan: ['', [Validators.required, Validators.minLength(2)]],
-        datosSecretarioNombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosSecretarioCorreo: ['', [Validators.required, Validators.email]],
-        datosTesoreroNombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosTesoreroCorreo: ['', [Validators.required, Validators.email]],
+        datosSecretarioNombre: ['', []],
+        datosSecretarioCorreo: ['', []],
+        datosTesoreroNombre: ['', []],
+        datosTesoreroCorreo: ['', []],
         nro_lista: ['', [Validators.required, Validators.min(1)]],
-        datosVocal1Nombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosVocal1Correo: ['', [Validators.required, Validators.email]],
-        datosVocal2Nombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosVocal2Correo: ['', [Validators.required, Validators.email]],
-        datosVocal3Nombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosVocal3Correo: ['', [Validators.required, Validators.email]],
-        logo: ['', [Validators.required, Validators.minLength(2)]],
+        datosVocal1Nombre: ['', []],
+        datosVocal1Correo: ['', []],
+        datosVocal2Nombre: ['', []],
+        datosVocal2Correo: ['', []],
+        datosVocal3Nombre: ['', []],
+        datosVocal3Correo: ['', []],
+        logo: this.archivos,
         propuesta: ['', [Validators.required, Validators.minLength(2)]],
-        estado: [false,[]],
+        estado: [false, []],
       })
     }
   }
@@ -94,7 +110,7 @@ export class CandidatoComponent {
   onSubmit() {
     if (this.form.valid) {
       this.addCandidato();
-     // this.onFileSelected(this.logo)
+      // this.onFileSelected(this.logo)
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
@@ -102,7 +118,7 @@ export class CandidatoComponent {
         },
         buttonsStyling: false
       })
-      
+
       swalWithBootstrapButtons.fire({
         title: 'Esta seguro de que quiere registrar esta lista?',
         icon: 'warning',
@@ -137,8 +153,8 @@ export class CandidatoComponent {
     }
     console.log(this.form.valid);
   }
-  
- 
+
+
 
   validateForm() {
     if (this.nombre === '' && this.nombre.length <= 3) {
@@ -146,14 +162,17 @@ export class CandidatoComponent {
     }
   }
 
+
   addCandidato() {
     this.candidatosService.addCandidato(this.form.value).subscribe(
-      response =>{
+      response => {
         console.log(response);
       }
     )
     this.data = Object.values(this.form.value);
     console.log("Desde componente" + this.data);
+    console.log(this.pre);
+    
   }
 
   // onFileSelected(event: any){
@@ -161,7 +180,7 @@ export class CandidatoComponent {
   //   this.candidatosService.uploadImage(file)
   // }
 
-  
+
   // addCandidatos() {
   //   this.candidatosService.addCandidatos(this.form.value).subscribe(
   //     response =>{

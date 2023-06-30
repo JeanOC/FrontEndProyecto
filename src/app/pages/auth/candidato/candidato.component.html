@@ -133,10 +133,13 @@
 
                         <div class="input-field">
                             <label>Logo de la Lista</label>
-                            <input type="file" id="file-upload" accept=".png, .jpg, .jpeg" formControlName="logo">
+                            <input type="file" id="file-upload" accept="image/*" formControlName="logo" (change)="onFile($event)">
                             <small *ngIf="form.controls['logo'].errors && form.controls['logo'].touched">
                                 El campo debe ser Completado
                             </small>
+                            <div *ngIf="pre">
+                                <img width="100px" [src]="pre">
+                              </div>
                         </div>
 
                         <div class="input-field">
