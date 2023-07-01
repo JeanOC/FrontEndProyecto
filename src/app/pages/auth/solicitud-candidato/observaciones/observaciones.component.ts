@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CandidatosService } from 'src/app/service/candidatos.service';
 
 @Component({
   selector: 'app-observaciones',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./observaciones.component.scss']
 })
 export class ObservacionesComponent {
-  
+  item: any
+
+  constructor(
+    private candidatosService: CandidatosService
+  ){
+    this.item = this.candidatosService.selectedCandidato
+    console.log(this.item)
+  }
+
 }

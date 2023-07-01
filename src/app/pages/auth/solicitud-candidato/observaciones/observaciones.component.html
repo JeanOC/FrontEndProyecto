@@ -19,10 +19,15 @@
             
         </div>
         <div class="contenedor-logo">
-            <h2>YAVIRAC UNIDO</h2>
-            <div>Lista #2</div>
+            <h2>{{item.nombre}}</h2>
+            <div>Lista # {{item.nro_lista}}</div>
             <div>Estado</div>
-            <input type="text" placeholder="Pendiente">
+            <select>
+                <option>{{item.estado}}</option>
+                <option>Aceptado</option>
+                <option>Negado</option>
+            </select>
+            <input type="text" placeholder="" value="{{item.estado}}">
             <div>Observaciones</div>
             <textarea class="input-s"></textarea>
             <button class="observaciones-b">

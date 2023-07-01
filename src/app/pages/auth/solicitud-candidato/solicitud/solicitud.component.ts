@@ -27,8 +27,8 @@ export class SolicitudComponent {
       (err) => console.log(err)
     );
   }
-  verDetalleCandidato(item: any) {
-    this.candidatoService.setSelectedCandidato(item);
+  verDetalleCandidato(candidato : any) {
+    this.candidatoService.selectedCandidato = candidato;;
     this.router.navigate(['/info-candidato']);
   }
 

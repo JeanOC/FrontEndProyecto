@@ -11,12 +11,11 @@ export class InfoCandidatoComponent {
 
   constructor(
     private candidatosService: CandidatosService
-  ){}
-
-  ngOnInit(){
+  ){
     this.item = this.candidatosService.selectedCandidato
     console.log(this.item)
   }
+
 
   
   
