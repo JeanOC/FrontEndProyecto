@@ -22,6 +22,7 @@ export class SolicitudComponent {
         this.listarUsuario = <any>res;
         this.candidatos = Object.values(this.listarUsuario);
         this.candidatos = Object.values(this.candidatos[0]);
+        console.log(this.candidatos.length);
        // this.tipoLista = Object.values(this.data[0].tipoLista)
       },
       (err) => console.log(err)

@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/auth/login/login/login.component';
 import { HeaderComponent } from './pages/auth/header/header.component';
 import { MenuComponent } from './pages/auth/menu/menu.component';
 import { CandidatoComponent } from './pages/auth/candidato/candidato.component';
+
 import { RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ResetPasswordComponent } from './pages/auth/login/reset-password/reset-password.component'
@@ -24,7 +25,8 @@ import { VistaListaComponent } from './pages/auth/listas/vista-lista/vista-lista
 import { TableModule } from 'primeng/table';
 import { AgregarUsuariosComponent } from './pages/auth/agregar-usuarios/agregar-usuarios.component';
 import { InputNumberModule } from 'primeng/inputnumber';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { Candidato1Component } from './pages/auth/candidato1/candidato1.component';
 
 
 
@@ -33,6 +35,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     AppComponent,
     LoginComponent,
     CandidatoComponent,
+    Candidato1Component,
     HeaderComponent,
     MenuComponent,
     PerfilCandidatoComponent,
@@ -59,7 +62,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ReactiveFormsModule,
     HttpClientModule,
     TableModule,
-    InputNumberModule
+    InputNumberModule,
+    InputTextModule
 
   ],
   providers: [],

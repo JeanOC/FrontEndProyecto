@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { CandidatosService } from '../../../service/candidatos.service';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -36,6 +37,8 @@ export class CandidatoComponent {
 
   data: any
   form: FormGroup;
+  candidatos:any[] = []
+  listarUsuarios:any;
   public pre: any = [];
   public archivos: any = []
 
@@ -51,31 +54,17 @@ export class CandidatoComponent {
     };
     reader.readAsDataURL(file);
   }
-
   constructor(private formBuilder: FormBuilder,
     private candidatosService: CandidatosService,
-    private sanitazer: DomSanitizer
+    private router: Router
   ) {
+    this.loadCandidato()
     if (this.candidatosService.selectedCandidato) {
       this.form = formBuilder.group({
         id: [this.candidatosService.selectedCandidato.id],
         nombre: [this.candidatosService.selectedCandidato.nombre, [Validators.required, Validators.minLength(2)]],
-        datosPresiNombre: [this.candidatosService.selectedCandidato.datosPresiNombre, [Validators.required, Validators.minLength(2)]],
-        datosPresiCorreo: [this.candidatosService.selectedCandidato.datosPresiCorreo, [Validators.required, Validators.email]],
-        datosViceNombre: [this.candidatosService.selectedCandidato.datosViceNombre, [Validators.required, Validators.minLength(2)]],
-        datosViceCorreo: [this.candidatosService.selectedCandidato.datosViceCorreo, [Validators.required, Validators.email]],
         slogan: [this.candidatosService.selectedCandidato.slogan, [Validators.required, Validators.minLength(2)]],
-        datosSecretarioNombre: [this.candidatosService.selectedCandidato.datosSecretarioNombre, [Validators.required, Validators.minLength(2)]],
-        datosSecretarioCorreo: [this.candidatosService.selectedCandidato.datosSecretarioCorreo, [Validators.required, Validators.email]],
-        datosTesoreroNombre: [this.candidatosService.selectedCandidato.datosTesoreroNombre, [Validators.required, Validators.minLength(2)]],
-        datosTesoreroCorreo: [this.candidatosService.selectedCandidato.datosTesoreroCorreo, [Validators.required, Validators.email]],
         nro_lista: [this.candidatosService.selectedCandidato.nro_lista, [Validators.required, Validators.min(1)]],
-        datosVocal1Nombre: [this.candidatosService.selectedCandidato.datosVocal1Nombre, [Validators.required, Validators.minLength(2)]],
-        datosVocal1Correo: [this.candidatosService.selectedCandidato.datosVocal1Correo, [Validators.required, Validators.email]],
-        datosVocal2Nombre: [this.candidatosService.selectedCandidato.datosVocal2Nombre, [Validators.required, Validators.minLength(2)]],
-        datosVocal2Correo: [this.candidatosService.selectedCandidato.datosVocal2Correo, [Validators.required, Validators.email]],
-        datosVocal3Nombre: [this.candidatosService.selectedCandidato.datosVocal3Nombre, [Validators.required, Validators.minLength(2)]],
-        datosVocal3Correo: [this.candidatosService.selectedCandidato.datosVocal3Correo, [Validators.required, Validators.email]],
         logo: [this.candidatosService.selectedCandidato.logo, [Validators.required, Validators.minLength(2)]],
         propuesta: [this.candidatosService.selectedCandidato.propuesta, [Validators.required, Validators.minLength(2)]],
         estado: [this.candidatosService.selectedCandidato.estado, []],
@@ -84,32 +73,18 @@ export class CandidatoComponent {
       this.form = formBuilder.group({
         //id: [0],
         nombre: ['', [Validators.required, Validators.minLength(2)]],
-        datosPresiNombre: ['', []],
-        datosPresiCorreo: ['', []],
-        datosViceNombre: ['', []],
-        datosViceCorreo: ['', []],
         slogan: ['', [Validators.required, Validators.minLength(2)]],
-        datosSecretarioNombre: ['', []],
-        datosSecretarioCorreo: ['', []],
-        datosTesoreroNombre: ['', []],
-        datosTesoreroCorreo: ['', []],
         nro_lista: ['', [Validators.required, Validators.min(1)]],
-        datosVocal1Nombre: ['', []],
-        datosVocal1Correo: ['', []],
-        datosVocal2Nombre: ['', []],
-        datosVocal2Correo: ['', []],
-        datosVocal3Nombre: ['', []],
-        datosVocal3Correo: ['', []],
-        logo: this.archivos,
+        logo:this.archivos,
         propuesta: ['', [Validators.required, Validators.minLength(2)]],
         estado: [false, []],
+        inputFields: this.formBuilder.array([])
       })
     }
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.addCandidato();
       // this.onFileSelected(this.logo)
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -133,6 +108,7 @@ export class CandidatoComponent {
             'Se enviará un correo de confirmación si su lista ha sido aceptada',
             'success'
           )
+          this.addCandidato();
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
@@ -161,6 +137,17 @@ export class CandidatoComponent {
 
     }
   }
+  loadCandidato() {
+    this.candidatosService.loadListas().subscribe(
+      (res) => {
+        this.listarUsuarios = <any>res;
+        this.candidatos = Object.values(this.listarUsuarios);
+        this.candidatos = Object.values(this.candidatos[0]);
+        console.log(this.candidatos);
+      },
+      (err) => console.log(err)
+    );
+  }
 
 
   addCandidato() {
@@ -171,8 +158,9 @@ export class CandidatoComponent {
     )
     this.data = Object.values(this.form.value);
     console.log("Desde componente" + this.data);
-    console.log(this.pre);
-    
+    this.candidatosService.selectedCandidato = this.candidatos;
+
+    this.router.navigate(['/candidato1'])
   }
 
   // onFileSelected(event: any){
@@ -201,6 +189,23 @@ export class CandidatoComponent {
 
 
 
+  get inputFields(){
+    return this.form.get('inputFields') as FormArray;
+  }
+
+  addInputFied(){
+    const newInputField = this.formBuilder.control('');
+    this.inputFields.push(newInputField);
+    console.log(this.inputFields.controls.length);
+    const inpu:any = document.getElementById('inp');
+    console.log(inpu);
+    
+    if(this.inputFields.controls.length == 7){
+      alert('Numero maximo de candidatos')
+      inpu.style.display = 'none';
+    }
+    
+  }
 }
 
 
