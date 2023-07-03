@@ -13,6 +13,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Si hay un error de file saver utilizar el comando `npm install file-saver`
+Si hay un error de tslib utilizar el comando `npm i tslib`
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
