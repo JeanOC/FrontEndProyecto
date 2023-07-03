@@ -48,6 +48,7 @@ export class SolicitudComponent {
     console.log(this.selectedCandidato.candidatos);
   }
 
+ 
 
   confirmarEliminacion() {
     const swalWithBootstrapButtons = Swal.mixin({

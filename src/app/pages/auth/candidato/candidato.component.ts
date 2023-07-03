@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { CandidatosService } from '../../../service/candidatos.service';
 import Swal from 'sweetalert2';
-import { DomSanitizer } from '@angular/platform-browser';
+//import { DomSanitizer } from '@angular/platform-browser';
 import { Route, Router } from '@angular/router';
 
 

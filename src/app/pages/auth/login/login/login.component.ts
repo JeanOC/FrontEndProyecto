@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/service/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -32,9 +33,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      alert('Usuario logeado con Exito ')
+      
       this.login()
       this.isRole()
+      Swal.fire({
+        icon: 'success',
+        title: 'Usuario Logeado con Exito',
+      })
     //  this.router.navigate(['candidato']);
     } else {
       alert('Usuario no registrado')
