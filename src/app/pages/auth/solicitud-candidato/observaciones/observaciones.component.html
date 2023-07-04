@@ -18,19 +18,20 @@
                   </button>
             
         </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" >
         <div class="contenedor-logo">
             <h2>{{item.nombre}}</h2>
             <div>Lista # {{item.nro_lista}}</div>
             <div>Estado</div>
-            <select>
+            <select formControlName="estado">
                 <option>{{item.estado}}</option>
-                <option>Aceptado</option>
-                <option>Negado</option>
+                <option value="true">Aceptado</option>
+                <option value="false">Negado</option>
             </select>
-            <input type="text" placeholder="" value="{{item.estado}}">
+       
             <div>Observaciones</div>
             <textarea class="input-s"></textarea>
-            <button class="observaciones-b">
+            <button class="observaciones-b" type="submit">
                 <span>Guardar Estado de lista</span>
             </button>
             <button class="observaciones-b">
@@ -40,6 +41,8 @@
                 <span>Enviar Correo Electrónico</span>
             </button>
         </div>
+    </form>
+    {{form.value | json}}
         <div class="contenedor-2">
             <img src="https://pbs.twimg.com/profile_images/953015820669636609/9cv2czeD_400x400.jpg" alt="" class="logo-lista">
         </div>
