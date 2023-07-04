@@ -16,7 +16,7 @@
     <div class="container">
         <header>Instituto Superior Tecnológico de Turismo y Patrimonio</header>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" style="height: 460px;">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" style="height: 600px;">
             <span class="title">Registro de Lista</span>
 
             <div class="form first">
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="input-field">
-                            <label>Prouesta de la Lista</label>
+                            <label>Propuesta de la Lista</label>
                             <input type="text" formControlName="propuesta">
                             <small *ngIf="form.controls['propuesta'].errors && form.controls['propuesta'].touched">
                                 El campo debe ser Completado

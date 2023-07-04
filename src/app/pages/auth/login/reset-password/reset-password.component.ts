@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reset-password',
@@ -22,9 +23,17 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit() {
     if (this.resetForm.valid) {
-      alert('Contraseña nueva enviada a su correo')
+      Swal.fire(
+        'Contraseña Enviada!',
+        'Revise su correo eletrónico!',
+        'success'
+      )
     } else {
-      alert('E-mail no valido')
+      Swal.fire({
+        icon: 'error',
+        title: 'Email Invalido',
+        text: 'Por favor llene o escriba un email válido!',
+      })
     }
   }
 /**

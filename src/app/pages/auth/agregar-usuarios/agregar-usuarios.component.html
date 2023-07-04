@@ -24,7 +24,7 @@
                     <div class="fields">
 
                         <div class="input-field">
-                            <label>Cedula:</label>
+                            <label>Cédula:</label>
                             <p-inputNumber inputId="cedula" formControlName="cedula" [showButtons]="false"
                                 [min]="0" [step]="5"></p-inputNumber>
                             <small *ngIf="formUser.controls['cedula'].errors && formUser.controls['cedula'].touched">
@@ -76,7 +76,7 @@
                         </div>
                         <div class="input-field">
                             <label>Clave:</label>
-                            <input type="text" formControlName="clave">
+                            <input type="password" formControlName="clave">
                             <small *ngIf="formUser.controls['clave'].errors && formUser.controls['clave'].touched">
                                 El campo debe ser Completado
                             </small>
@@ -109,7 +109,7 @@
                 <button  pButton type="button" class="p-button-warning" label="Actualizar" (click)="updateUsuario()">Actualizar</button>
             </div>
         </form>
-        {{formUser.value | json}}
+        
     </div>
 
 

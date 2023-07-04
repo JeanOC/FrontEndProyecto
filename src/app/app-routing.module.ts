@@ -23,16 +23,12 @@ import { Candidato1Component } from './pages/auth/candidato1/candidato1.componen
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'header', component: HeaderComponent },
-  { path: 'menu', component: MenuComponent },
   { path: 'candidato', component: CandidatoComponent},
   { path: 'candidato1', component: Candidato1Component},
   { path: 'observaciones', component: ObservacionesComponent, canActivate:[PermisosGuard ] },
   { path: 'solicitud', component: SolicitudComponent ,canActivate:[PermisosGuard, RoleGuard]},
   { path: 'perfil-candidato', component: PerfilCandidatoComponent ,canActivate:[PermisosGuard, ]},
-  { path: 'observaciones', component: ObservacionesComponent ,canActivate:[PermisosGuard ]},
   { path: 'ver-candidato', component: VerCandidatoComponent ,canActivate:[PermisosGuard ]},
-  { path: 'agregar-usuarios', component: AgregarUsuariosComponent ,canActivate:[PermisosGuard, ]},
   { path: 'info-candidato', component: InfoCandidatoComponent ,canActivate:[PermisosGuard ]},
   { path: 'resetearContraseña', component: ResetPasswordComponent },
   { path: 'usuarios', component: UsuariosComponent, canActivate:[PermisosGuard ]},

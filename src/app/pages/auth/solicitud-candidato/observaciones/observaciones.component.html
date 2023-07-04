@@ -30,13 +30,13 @@
             <input type="text" placeholder="" value="{{item.estado}}">
             <div>Observaciones</div>
             <textarea class="input-s"></textarea>
-            <button class="observaciones-b">
+            <button class="observaciones-b" (click)="guardarEstado()">
                 <span>Guardar Estado de lista</span>
             </button>
             <button class="observaciones-b">
                 <span>Imprimir Informe</span>
             </button>
-            <button class="observaciones-b">
+            <button class="observaciones-b" (click)="enviarCorreo()">
                 <span>Enviar Correo Electrónico</span>
             </button>
         </div>

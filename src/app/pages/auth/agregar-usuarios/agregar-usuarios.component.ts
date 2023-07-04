@@ -79,7 +79,7 @@ export class AgregarUsuariosComponent {
         if (result.isConfirmed) {
           swalWithBootstrapButtons.fire(
             'Usuario registrado con Exito!',
-            'Se enviará un correo de confirmación si su Usuario fue Aceptado',
+            '',
             'success'
           )
 
