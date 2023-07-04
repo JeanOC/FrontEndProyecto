@@ -161,7 +161,7 @@ export class CandidatoComponent {
     console.log("Desde componente" + this.data);
     this.candidatosService.selectedCandidato = this.candidatos;
 
-    this.router.navigate(['/candidato1'])
+    this.router.navigate(['/login'])
   }
 
   // onFileSelected(event: any){
