@@ -10,6 +10,7 @@ import { CandidatosService } from 'src/app/service/candidatos.service';
 
 export class VistaListaComponent {
   candidatos: any[] = [];
+  listas:any[] = []
   selectedCandidato: any;
   listarUsuario:any
   constructor(private candidatoService: CandidatosService, private router: Router) {
@@ -24,8 +25,18 @@ loadCandidato() {
     (res) => {
       this.listarUsuario = <any>res;
       this.candidatos = Object.values(this.listarUsuario);
-      this.candidatos = Object.values(this.candidatos[0]);
-     // this.tipoLista = Object.values(this.data[0].tipoLista)
+      this.candidatos = Object.values(this.candidatos[0]);  
+      for(let i = 0; i < this.candidatos.length; i++){
+         if(this.candidatos[i].estado == true){
+        console.log(this.candidatos[i]);
+        this.listas.push(this.candidatos[i])
+         }
+       
+      }
+      // if(this.candidatos[0].estado === true){
+      //   console.log(this.candidatos);
+      //   this.listas = Object.values(this.candidatos)
+      // }
     },
     (err) => console.log(err)
   );
