@@ -18,9 +18,6 @@ export class VistaListaComponent {
 /**
  * funcion llevar a la vista candidatos
  */
-clickVerCandidatos(){
-  this.router.navigate(['vista-integrantes'])
-}
 
 loadCandidato() {
   this.candidatoService.loadListas().subscribe(
@@ -32,5 +29,10 @@ loadCandidato() {
     },
     (err) => console.log(err)
   );
+}
+
+clickVerCandidatos(candidato: any){
+  this.candidatoService.selectedCandidato = candidato;
+  this.router.navigate(['vista-integrantes'])
 }
 }

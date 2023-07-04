@@ -34,9 +34,9 @@ export class CandidatosService {
     return this.http.post(this.urlL, payload)
   }
 
-  updateCandidato(id: number, payload: any) {
-    const index = this.candidatos.findIndex(candidato => candidato.id === id);
-    this.candidatos[index] = payload;
+  updateCandidato(id: any, payload: number) {
+    console.log(id , payload);
+    return this.http.put(this.url + '/' +id , payload);
   }
 
 

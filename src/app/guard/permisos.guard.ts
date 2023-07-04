@@ -15,7 +15,6 @@ constructor(private login:LoginService , private router: Router){
 
 canActivate(): boolean{
   if(this.login.isLogin()){
-   
     return true
   }
   alert('DEBE LOGEARSE')

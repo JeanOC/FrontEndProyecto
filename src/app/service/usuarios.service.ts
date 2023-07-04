@@ -28,9 +28,10 @@ export class UsuariosService {
   /**
    * function actualizar usuarios 
    */
-  updateUsuario(id: number, payLoad: any) {
-    const index = this.usuarios.findIndex(usuario => usuario.id === id);
-    this.usuarios[index] = payLoad;
+  updateUsuario(id: any, payLoad: any) {
+    console.log(id, payLoad);
+    
+    return this.http.put(this.url+'/'+ id, payLoad)
   }
 
   /**

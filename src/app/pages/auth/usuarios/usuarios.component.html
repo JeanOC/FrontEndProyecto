@@ -13,6 +13,7 @@
         <div class="button-container">
             <button>
                 <span>Importar Usuarios</span>
+                <input type="file" (change)="handleFileInput($event)" accept=".xlsx, .xls">
             </button>
             <button (click)="exportToExcel()">
                 <span>Exportar usuarios</span>

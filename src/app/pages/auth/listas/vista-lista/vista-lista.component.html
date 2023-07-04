@@ -16,11 +16,12 @@
         <div class="col-sm-4" *ngFor="let lista of candidatos">
             <div class="card">
                 <div class="card-body">
+                    <p>{{lista.id}}</p>
                     <h4 class="card-title" class="text-center">{{lista.nombre}}</h4>
                     <p class="card-text">
                         {{lista.propuesta}}
                     </p>
-                    <button class="btn btn-dark" (click)="clickVerCandidatos()">Ver Lista</button>
+                    <button class="btn btn-dark" (click)="clickVerCandidatos(lista)">Ver Lista</button>
                 </div>
             </div>
         </div>

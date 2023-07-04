@@ -8,18 +8,19 @@ import { LoginService } from '../service/login.service';
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
-use:any;
+user:any;
+rol:any;
 constructor(private login:LoginService , private router: Router){
-
+  this.user = sessionStorage.getItem('user');
 }
 
 canActivate(){
-  if('a' == 'a'){  
+  if(this.user === 'admin'){  
    return true 
   }
   alert('No tiene permiso')
-  this.router.navigate(['/vista-lista'])
+  this.router.navigate(['/login'])
   return false
 }
 
-}
+} 

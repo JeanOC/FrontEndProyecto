@@ -95,15 +95,11 @@ export class UsuariosComponent {
 
   exportToExcel(): void {
     // Datos de ejemplo, reemplázalos con los datos de tu tabla
-    const usuarios = [
-      { CI: 'Usuario 1', 	Nombres: 'Augusto Cesar Veintimilla Tercero', Carrera: 'Arte Culinario', Nivel: '1'},
-    ];
-  
     // Crea un nuevo libro de trabajo de Excel
     const workbook = XLSX.utils.book_new();
   
     // Crea una hoja de trabajo y asigna los datos de la tabla a la misma
-    const worksheet = XLSX.utils.json_to_sheet(usuarios);
+    const worksheet = XLSX.utils.json_to_sheet(this.usuarios);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Usuarios');
   
     // Genera el archivo Excel
@@ -117,7 +113,29 @@ export class UsuariosComponent {
    * function agregar usuarios
    */
 
-  addNewUsuario(){
-
+  handleFileInput(event: any) {
+    const file: File = event.target.files[0];
+    const fileReader: FileReader = new FileReader();
+  
+    fileReader.onload = (e: any) => {
+      const arrayBuffer: any = e.target.result;
+      const workbook: XLSX.WorkBook = XLSX.read(arrayBuffer, { type: 'array' });
+      const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      console.log(Object.values(jsonData));
+      
+  for(let i = 0;  i < jsonData.length; i++){
+    console.log(jsonData[i]);
+    
+    this.usuariosService.addUsuarios(jsonData[i]).subscribe(
+      response =>{
+        console.log(response);
+      }
+     )
+  }
+// Aquí puedes trabajar con los datos del archivo Excel
+    };
+  
+    fileReader.readAsArrayBuffer(file);
   }
 }

@@ -1,13 +1,13 @@
 <app-header></app-header>
 <div class="container">
     <div class="text-center">
-        <h3> <b> lista name List </b></h3>
+        <h3> <b> {{item.nombre}} </b></h3>
     </div>
     <div>
         <button class="btn btn-warning" (click)="clickRegresar()"> <-Volver a las Listas</button>
     </div>
     <div>
-        <img src="" alt="...">
+        <p>{{item.logo}}</p>
     </div>
     <div class="alert alert-primary" role="alert">
         <h4 class="text-center">Miembros de la lista</h4>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Partido Democracia Directa</h5>
+                            <h5 class="card-title">Presidente</h5>
                             <p class="card-text">Lista 500 PDD</p>
                             <p class="card-text">Eudacio Palacios</p>
                         </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Partido Democracia Directa</h5>
+                            <h5 class="card-title">Viceresidente</h5>
                             <p class="card-text">Lista 500 PDD</p>
                             <p class="card-text">Eudacio Palacios</p>
                         </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Partido Democracia Directa</h5>
+                            <h5 class="card-title">Secretario</h5>
                             <p class="card-text">Lista 500 PDD</p>
                             <p class="card-text">Eudacio Palacios</p>
                         </div>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Partido Democracia Directa</h5>
+                            <h5 class="card-title">Vocal</h5>
                             <p class="card-text">Lista 500 PDD</p>
                             <p class="card-text">Eudacio Palacios</p>
                         </div>
@@ -91,7 +91,7 @@
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>Nuestra Lista tiene como proposito hacer que los Estudiantes.</p>
+                        <p>{{item.propuesta}}</p>
                     </blockquote>
                 </div>
             </div>
@@ -99,9 +99,12 @@
         </div>
 
     </div>
-
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" style="height: 460px;">
+        <div>
+            <input type="number" formControlName="votos" style="display: none;">
+        </div>
     <div class="button-container">
-        <button class="btn btn-success" (click)="registrarVoto()">Sufragar</button>
+        <button class="btn btn-success" type="submit">Sufragar</button>
     </div>
-
+</form>
 </div>
