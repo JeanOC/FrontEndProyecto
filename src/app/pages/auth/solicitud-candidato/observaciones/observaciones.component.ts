@@ -20,7 +20,7 @@ export class ObservacionesComponent {
     this.item = this.candidatosService.selectedCandidato
     console.log(this.item);
     this.form = formBuilder.group({
-      estado:[false, Validators.required]
+      estado:[this.item.estado, Validators.required]
     })
   }
   
